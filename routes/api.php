@@ -24,3 +24,5 @@ Route::get('catagory',[CatagoryController:: class, 'index']);
 Route::post('catagory/store',[CatagoryController:: class, 'store']);
 Route::get('item',[ItemController:: class, 'index']);
 Route::post('item/storeItem',[ItemController:: class, 'storeItem']);
+Route::put('item/updateItem/{id}',[ItemController:: class, 'update']);
+Route::delete('item/deleteItem/{id}',[ItemController:: class, 'destroy']);

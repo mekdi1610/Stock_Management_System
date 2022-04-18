@@ -20,6 +20,7 @@
  // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
  Vue.component('example-component', require('./components/ExampleComponent.vue').default);
  Vue.component('create-item', require('./components/CreateItem.vue').default);
+ Vue.component('update-item', require('./components/UpdateItem.vue').default);
  Vue.component('view-item', require('./components/ViewItem.vue').default);
 
  Vue.component('add-catagory', require('./components/AddCatagory.vue').default);

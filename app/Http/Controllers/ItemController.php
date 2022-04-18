@@ -71,7 +71,7 @@ class ItemController extends Controller
      */
     public function edit(item $item)
     {
-        //
+
     }
 
     /**
@@ -81,9 +81,12 @@ class ItemController extends Controller
      * @param  \App\Models\item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, item $item)
+    public function update(Request $request, $id)
     {
-        //
+        $item=item::find($id);
+        $item->update($request->all());
+
+        return view('items.storeItems');
     }
 
     /**
@@ -92,8 +95,8 @@ class ItemController extends Controller
      * @param  \App\Models\item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(item $item)
+    public function destroy($id)
     {
-        //
+        return item::destroy($id);
     }
 }

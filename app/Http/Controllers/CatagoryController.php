@@ -66,7 +66,11 @@ class CatagoryController extends Controller
      */
     public function edit(catagory $catagory)
     {
-        //
+        
+        $catagory = catagory::findOrFail($id);
+        $catagory->update($request->all());
+
+        return $catagory;
     }
 
     /**
