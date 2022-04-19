@@ -60,9 +60,6 @@
         },
 
         methods : {
-            deleteNotification(count){
-                console.log("hsa")
-            },
             UpdateItem(id) {
                 console.log(id);
                 var formData = new FormData(document.getElementById("myForm"));

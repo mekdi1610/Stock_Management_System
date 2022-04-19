@@ -25,6 +25,7 @@
 
  Vue.component('add-catagory', require('./components/AddCatagory.vue').default);
  Vue.component('view-catagory', require('./components/ViewCatagory.vue').default);
+ Vue.component('dashboard', require('./components/Dashboard.vue').default);
 
  /**
   * Next, we will create a fresh Vue application instance and attach it to
