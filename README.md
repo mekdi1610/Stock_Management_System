@@ -1,64 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Stock Management System
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a stock management system developed using **Laravel** (backend) and **VueJS** (frontend). The system is designed for store owners to manage items across different warehouses, enabling storekeepers to track inventory, order products, and allocate items to specific warehouses. Additionally, **Laravel Horizon** is integrated to handle background job processing and monitoring.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Warehouse Management**: Manage multiple warehouses and keep track of stock levels.
+- **Order Processing**: Storekeepers can order products and monitor order status.
+- **Product Allocation**: Allocate products between warehouses with real-time updates.
+- **Background Job Processing**: Key tasks like order processing, inventory tracking, and product allocation are offloaded to background jobs.
+- **Real-Time Monitoring**: Laravel Horizon provides a dashboard to monitor jobs, throughput, and failures.
+- **VueJS Integration**: Real-time updates for storekeepers via a dynamic VueJS frontend.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.x
+- Laravel 10.x
+- Redis
+- Node.js
+- Composer
+- VueJS 3.x
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone the repository:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   ```bash
+   git clone https://github.com/yourusername/stock-management-system.git
+   cd stock-management-system
+   ```
 
-## Laravel Sponsors
+2. Install dependencies:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+   ```bash
+   composer install
+   npm install
+   ```
 
-### Premium Partners
+3. Set up your `.env` file:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. Configure your database and Redis settings in the `.env` file.
+
+5. Run database migrations:
+
+   ```bash
+   php artisan migrate
+   ```
+
+6. Install and configure **Laravel Horizon**:
+
+   ```bash
+   composer require laravel/horizon
+   php artisan horizon:install
+   ```
+
+7. Build frontend assets:
+
+   ```bash
+   npm run dev
+   ```
+
+## Usage
+
+1. Start the Laravel development server:
+
+   ```bash
+   php artisan serve
+   ```
+
+2. Start the Redis server.
+
+3. Start Laravel Horizon to monitor background jobs:
+
+   ```bash
+   php artisan horizon
+   ```
+
+4. Access the application at `http://localhost:8000`.
+
+5. Access the Horizon dashboard at `http://localhost:8000/horizon` to monitor your background jobs.
+
+## Key Operations
+
+- **Order Processing**: Storekeepers can place orders, which are processed as background jobs to improve performance.
+- **Product Allocation**: Allocate items to warehouses via background jobs, ensuring scalability and responsiveness.
+- **Inventory Tracking**: Automatically sync inventory levels across warehouses using background jobs.
+
+## VueJS Integration
+
+The VueJS frontend provides real-time status updates for storekeepers. For example, when an order is processed or a product is allocated, the storekeeper will receive notifications based on the status of the background job.
+
+## Monitoring with Laravel Horizon
+
+Horizon provides real-time metrics on job performance, including job execution times, throughput, and failure rates. Failed jobs can be retried directly from the Horizon dashboard.
+
+## Notifications and Alerts
+
+Alerts are configured for failed jobs to ensure reliability. For example, you can receive Slack notifications if a critical job such as inventory tracking fails.
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
